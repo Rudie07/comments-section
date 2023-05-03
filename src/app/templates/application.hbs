@@ -1,0 +1,30 @@
+{{page-title "Comment Feed"}}
+
+<div class="comments-container">
+  <h2>Comments feed</h2>
+  <div class="comments-list">
+    {{#each this.comments as |comment|}}
+    <div class="comment">
+      <div class="comment-content">
+        <p class="comment-author">{{comment.name}} <span class="comment-time">{{date-converter comment.created}}</span></p>
+        <p class="comment-text">{{comment.message}}</p>
+      </div>
+      {{!-- <button class="delete-btn" type="button" {{action 'deleteComment' comment}}>X</button> --}}
+    </div>
+    {{/each}}
+    {{#if this.comments.length}}
+    <button class="delete-all-btn" type="button" {{action 'deleteAllComments'}}>Delete All Comments</button>
+    {{/if}}
+  </div>
+  <div class="comment-form">
+    <div class="form-group">
+      <label for="comment-author">Your name:</label>
+      {{input type="text" id="comment-author" name="comment-author" value=this.currentName}}
+    </div>
+    <div class="form-group">
+      <label for="comment-text">Your comment:</label>
+      {{textarea id="comment-text" name="comment-text" value=this.currentMessage}}
+    </div>
+    <button type="submit" {{action 'addComment'}}>Comment</button>
+  </div>
+</div>
